@@ -1,0 +1,55 @@
+<div class="filter-box-title">
+  <h3>Варианты сортировки:</h3>
+  <button mat-raised-button (click)="clearFilters()">
+    Сбросить все фильтры
+  </button>
+</div>
+<div class="filter-box-container">
+  <mat-form-field appearance="fill" density="dense">
+    <mat-label>Приоритет</mat-label>
+    <mat-select
+      [(ngModel)]="selectedPriority"
+      (selectionChange)="applyFilter('priority')"
+    >
+      @for (option of priorityOptions; track option.value) {
+      <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" density="dense">
+    <mat-label>Статус</mat-label>
+    <mat-select
+      [(ngModel)]="selectedStatus"
+      (selectionChange)="applyFilter('status')"
+    >
+      @for (option of statusOptions; track option.value) {
+      <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" density="dense">
+    <mat-label>Исполнитель</mat-label>
+    <mat-select
+      [(ngModel)]="selectedAssignee"
+      (selectionChange)="applyFilter('assignee')"
+    >
+      @for (option of assigneeOptions; track option.value) {
+      <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" density="dense">
+    <mat-label>Дата дедлайна</mat-label>
+    <input
+      matInput
+      [matDatepicker]="deadlinePicker"
+      [(ngModel)]="deadlineDate"
+      (dateChange)="applyFilter('deadline')"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="deadlinePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #deadlinePicker></mat-datepicker>
+  </mat-form-field>
+</div>

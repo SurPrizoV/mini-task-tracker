@@ -1,0 +1,47 @@
+<h3>Добавить новую задачу:</h3>
+<mat-icon
+  aria-hidden="false"
+  aria-label="add circle icon"
+  fontIcon="add_circle"
+  class="add-icon"
+  title="Добавить новую задачу"
+  (click)="openTaskDialog()"
+></mat-icon>
+<mat-list>
+  <div class="task-item">
+    <p>Задача</p>
+    <p>Описание</p>
+    <p>Дедлайн</p>
+    <p>Приоритет</p>
+    <p>Статус</p>
+    <p>Исполнители</p>
+  </div>
+  <mat-divider class="mb"></mat-divider>
+  @if (loading$ | async) {
+  <div class="spinner-container">
+    <mat-progress-spinner
+      diameter="80"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  </div>
+  } @else if (error$ | async) {
+  <div class="spinner-container">
+    <p class="error">Произошла ошибка, попробуйте позже...</p>
+  </div>
+  } @else { @for (task of tasks$ | async; track task; let last = $last) {
+  <div class="task-item task-item--scale" (click)="openEditTaskDialog(task)">
+    <p>{{ task.title }}</p>
+    <p>{{ task.description }}</p>
+    <p>{{ task.deadline | date : "dd.MM.yyyy" }}</p>
+    <p>{{ task.priority | priority }}</p>
+    <p>{{ task.status | status }}</p>
+    <div class="assignees">
+      @for (assign of task.assignees; track assign) {
+      <p>{{ assign | assignee }}</p>
+      }
+    </div>
+  </div>
+  @if (!last) {
+  <mat-divider></mat-divider>
+  } } }
+</mat-list>

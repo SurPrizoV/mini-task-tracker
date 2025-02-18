@@ -1,0 +1,53 @@
+<form [formGroup]="taskForm" (ngSubmit)="updateTask()">
+  <mat-form-field appearance="outline">
+    <mat-label>Название задачи</mat-label>
+    <input
+      matInput
+      placeholder="Введите название"
+      formControlName="taskTitle"
+      required
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Описание</mat-label>
+    <textarea
+      matInput
+      placeholder="Введите описание"
+      formControlName="taskDescription"
+    ></textarea>
+  </mat-form-field>
+  <app-select
+    [label]="'Приоритет'"
+    [options]="priorities"
+    formControlName="taskPriority"
+    required
+  ></app-select>
+  <app-select
+    [label]="'Статус'"
+    [options]="statuses"
+    formControlName="taskStatus"
+    required
+  ></app-select>
+  <app-select
+    [label]="'Исполнители'"
+    [options]="assignees"
+    formControlName="taskAssignees"
+    [multiple]="true"
+  ></app-select>
+  <mat-form-field appearance="outline">
+    <mat-label>Дедлайн</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      formControlName="taskDeadline"
+      [min]="today"
+      required
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button>Сохранить</button>
+  <button mat-flat-button color="warn" type="button" (click)="deleteTask()">
+    Удалить
+  </button>
+</form>

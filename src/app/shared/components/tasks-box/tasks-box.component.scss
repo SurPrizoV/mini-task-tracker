@@ -1,0 +1,36 @@
+.add-icon {
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  &--scale {
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 20px 6px 25px #e2e0e0;
+    }
+  }
+  & p {
+    word-wrap: break-word;
+    margin: 4px;
+  }
+}
+
+.mb {
+  margin-bottom: 24px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}

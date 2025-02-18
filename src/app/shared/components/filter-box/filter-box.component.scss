@@ -1,0 +1,10 @@
+.filter-box {
+  &-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
